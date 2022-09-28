@@ -138,3 +138,101 @@ p.25
 
 # Pick One Word
 "Pick one word for one abstract concept and stick with it. For instance, it's confusing to have fetch, retrive, and get as equivalent methods of different classes. How do you remember which method name goes with which class? Sadly, you often have to remember which company, group, or individual wrote the library or class in order to remember which term was used. Otherwise, you spend an awful lot of time browsing through headers and previous code samples." p. 26.
+
+# Don't Pun
+"Avoid using the same word for two purposes." p. 26
+
+"So we should use a name like insert or append instead. To call the new method add would be a pun." p. 27
+
+"Our goal, as authors, is to make our code as easy as possible to understand. We want our code to be a quick skim, not an intense study." p. 27
+
+# Use Solution Domain Names
+"Remember that the people who read your code will be programmers. So go ahead and use computer science (CS) terms, algorithm names, pattern names, math terms, and so forth." p. 27
+
+"The name AccountVisitor means a great deal to a programmer who is familiar with the VISITOR pattern." p. 27
+
+# Use Problem Domain Names
+"Separating solution and problem domain concepts is part of the job of a good programmer and designer. The code that has more to do with problem domain concepts should have names drawn from the problem domain." p. 27
+
+# Add Meaningful Content
+"Instead, you need to place names in context for your reader by enclosing them in well-named classes, functions, or namespaces. When all else fails, then prefixing the name may be necessary as a last resort." p. 27
+
+### ex. Variables With Unclear Context
+private void printGuessStatistics (char candidate, int count) {
+    String number;
+    String verb;
+    String pluralModifier;
+    if (count == 0) {
+        number = "no";
+        verb = "are";
+        pluralModifier = "s";
+    } else if (count == 1) {
+        number = "1";
+        verb = "is";
+        pluralModifier = "";
+    } else {
+        number = Integer.toString(count);
+        verb = "are";
+        pluralModifier = "s";
+    }
+    String guessMessage = String.format (
+        "There %s %s %s%s", verb, number, candidate, pluralModifier
+    );
+    print(guessMessage);
+}
+
+### ex. Variables Have a Context
+public class GuessStatisticsMessage {
+    private String number;
+    private String verb;
+    private String pluralModifier;
+
+    public String make(char candidate, int count) {
+        createPluralDependentMessageParts(count);
+        return String.format(
+            "There %s %s %s%s",
+            verb, number, candidate, pluralModifier );
+    }
+
+    private void createPluralDependentMessageParts(int count) {
+        if (count == 0) {
+            thereAreNoLetters();
+        } else if (count == 1) {
+            thereIsOneLetter();
+        } else {
+            thereAreManyLetters(count);
+        }
+    }
+
+    private void thereAreManyLetters(int count) {
+        number = Integer.toString(count);
+        verb = "are";
+        pluralModifier = "s";
+    }
+
+    private void thereIsOneLetter() {
+        number = "1";
+        verb - "is";
+        pluralModifier = "";
+    }
+
+    private void thereAreNoLetters() {
+        number = "no";
+        verb = "are";
+        pluralModifier = "s";
+    }
+}
+
+# Don't Add Gratuitous Context
+"In an imaginary application called 'Gas Station Deluxe,' it is a bad idea to prefix every class with GSD." p. 29
+
+"Shorter names are generally better than longer ones, so long as they are clear. Add no more context to a name than is necessary." p. 30
+
+"The names accountAddress and customerAddress are fine names for instances of the class Address but could be poor names for classes. Address is a fine name for a class. If I need to different between MAC addresses, port addresses, and Web addresses, I might consider PostalAddress, MAC, and URI. The resulting names are more precise, which is the point of all naming." p. 30
+
+# Final Words
+"The hardest thing about choosing good names is that it requires good descriptive skills and a shared cultural background." p. 30
+
+"You will probably end up surprising someone when you rename, just like you might with any other code improvement. Don't let it stop you in your tracks." p. 30
+
+"If you are maintaining someone else's code, use refactoring tools to help resolve these problems. It will pay off in the short term and continue to pay in the long run." p. 30.
