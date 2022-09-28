@@ -52,11 +52,11 @@ else
 "Number-series naming (a1, a2, .. aN) is the opposite of intentional naming. Such names are not disinformative--they are noninformative; they provide no clue to what the author's intention." p. 21
 
 ### ex. Intent?
-public static voice copyChars (char a1[], char a2[]) {
-    for (int i = 0; i < a1.length; i++) {
-        a2[i] = a1[i];
-    }
-}
+public static voice copyChars (char a1[], char a2[]) {  
+    for (int i = 0; i < a1.length; i++) {  
+        a2[i] = a1[i];  
+    }  
+}  
 
 "Noise words are another meaningless distinction. Imagine that you have a 'Product' class. If you have another called 'ProductInfo' or 'ProductData', you have made the names different without making them mean anything different. 'Info' and 'Data' are indistinct noise words like 'a', 'an', and 'the'." p. 21
 
