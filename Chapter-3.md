@@ -69,46 +69,76 @@ p. 35
 "We should have split the function into two: renderForSuit() and renderForSingleTest()." p. 41
 
 ## Dyadic Functions
+"Cartesian points naturally take two arguments." p. 42
 
+:Even obvious dyadic functions like assertEquals(expected, actual) are problematic. How many times have you put the actual where the expected should be? The two arguments have no natural ordering. The expected, actual ordering is a convention that requires practice of learn." p. 42
 
 ## Triads
-
+"Functions that take three arguments are significantly harder to understand than dyads... I suggest you think very carefully before creating a triad." p. 42
 
 ## Argument Objects
+"When a function seems to need more than two or three arguments, it is likely that some of those arguments ought to be wrapped into a class of their own."
 
+ex. 
+Circle makeCircle(double x, double y,double radius);
+Circle makeCircle(point center, double radius);
 
 ## Argument Lists
+"Sometimes we want to pass a variable number of arguments into a function." p. 43
 
+"Functions that take variable arguments can be monads, dyads, or even triads." p. 43
 
 ## Verbs and Keywords
+"In the case of monad, the function and argument should form a very nice verb/noun pair." p. 43
 
 
 ## Have No Side Effects
+"Side effets are lies. Your function promises to do one thing, but it also does other hidden things." p. 44
 
+The side effect is the call to Session.initialize(), of course. The checkPassword function, by its name, says that it checks the password. The name does not imply that it initializes the session. So a caller who believes what the name of the function says runs the risk of erasing the existing session data when he or she decides to check the validity of the user." p. 44. Refer to example on page 44 for better insight and clarity.
+
+"This side effect creates a temporal coupling." p. 44
+Temporal couplings are confusing, especially when hidden as a side effect. If you must have a temporal couping, you should make it clear in the name of the function." p. 44
 
 ## Output Arguments
+"Arguments are most naturally interpreted as inputs to a function." p. 45
 
+"Anything that forces you to check the function signature is equivalent to a double-take. It's a cognitive break that should be avoided." p. 45
+
+"If your function must change the state of something, have it change the state of its owning object." p. 45
 
 ## Command Query Separation
+"Functions should either do something or answer something, but not both." p. 45
 
+"Functions should change the state of an object, or it should return some information about that object." p. 45
 
 ## Prefer Exceptions to Returning Error Codes
+"Returning error codes from command functions is a subtle violation of command query separation." p. 46
 
+".. lead to deeply nested structures. When you return an error code, you create the problem that the caller must deal with the error immediately." p. 46
+
+ex.
+
+"If you use exceptions instead of returned error codes, the the error processing code can be separeated from the happy path code and can be simplified." p. 46
+
+ex.
 
 ## Extract Try/Catch Blocks
+"Try/catch blocks are ugly in their own right. They confuse the structure of the code and mix error processing with normal processing. So it is better to extract the bodies of the try and catch blocks out into functions of their own." p. 46
 
+ex. p. 47
 
 ## Error Handling Is One Thing
-
+"Functions should do one thing. Error handling is one thing. Thus, a function that handles errors should do nothing else. This implies (as in the example above) that if the keyword try exists in a function, it should be the very first word in the function and that there should be nothing after the catch/finally blocks." p. 47
 
 ## The Error.java Dependency Magnet
-
+"Classes like this are a dependency magnet; many other classes must import and use them. Thus, when the Error enum changes, all those other classes need to be recomplied and redeployed. This puts a negative pressure on the Error class. Programmers don't want to add new errors because then they have to rebuild and redeploy everything. So they reuse old error codes instead of adding new ones." p. 48
 
 ## Don't Repeat Yourself
 DRY Principle.
 
 ## Structured Programming
-
+"Following these rules means that there should only be one return statement in a function, no break or continue statements in a loop, and never, ever, any goto statements." p. 48
 
 ## How Do You Write FUnctions Like THis?
 "In the end, I wind up with functions that follow the rules I've laid down in this chapter. I don't write them that way to start. I don't think anyone could." p. 49
